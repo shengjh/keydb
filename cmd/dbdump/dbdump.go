@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/robaho/keydb"
+	"github.com/shengjh/keydb"
 	"html"
 	"io/ioutil"
 	"log"

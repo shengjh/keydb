@@ -3,7 +3,7 @@ package structkeys
 import (
 	"bytes"
 	"fmt"
-	"github.com/robaho/keydb"
+	"github.com/shengjh/keydb"
 	"strings"
 	"time"
 )
@@ -48,7 +48,7 @@ func main() {
 
 	path := "test/structkeys"
 
-	keydb.Remove(path)
+	//keydb.Remove(path)
 	db, err := keydb.Open(path, true)
 	if err != nil {
 		panic(err)

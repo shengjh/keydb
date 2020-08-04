@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/xml"
 	"flag"
-	"github.com/robaho/keydb"
+	"github.com/shengjh/keydb"
 	"log"
 	"os"
 	"path/filepath"

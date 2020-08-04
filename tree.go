@@ -246,7 +246,7 @@ func (q *queue) isEmpty() bool {
 	return len(q.values) == 0
 }
 
-func (t *Tree) bfsDump() int {
+func (t *Tree) BfsDump() int {
 	q := newQueue()
 	q.enqueue(t.root)
 
@@ -267,6 +267,38 @@ func (t *Tree) bfsDump() int {
 		height++
 	}
 	return height
+}
+
+// This will not print nodes as Tree view(like each line)
+func (t *Tree) BfsDump1()  {
+	q := newQueue()
+	q.enqueue(t.root)
+
+	for !q.isEmpty(){
+		n := q.dequeue()
+		fmt.Print(string(n.key), "(", n.balance(), "/", n.height(), ") ")
+		if n.left != nil {
+			q.enqueue(n.left)
+		}
+		if n.right != nil {
+			q.enqueue(n.right)
+		}
+	}
+}
+
+
+func (n *node) dfsDump() {
+	if n == nil{
+		return
+	}
+
+	fmt.Print(string(n.key), "(", n.balance(), "/", n.height(), ") ")
+	n.left.dfsDump()
+	n.right.dfsDump()
+}
+
+func (t *Tree) DfsDump()  {
+	t.root.dfsDump()
 }
 
 func max(a, b int) int {

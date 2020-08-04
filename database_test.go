@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 )
-import "github.com/robaho/keydb"
+import "github.com/shengjh/keydb"
 
 func TestDatabase(t *testing.T) {
 	keydb.Remove("test/mydb")

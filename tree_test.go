@@ -42,7 +42,7 @@ func TestTree2(t *testing.T) {
 		tree.Insert([]byte(fmt.Sprint("mykey", i)), []byte(fmt.Sprint("myval", i)))
 	}
 
-	height := tree.bfsDump()
+	height := tree.BfsDump()
 
 	if float64(height) > math.Log2(150000)*math.Phi {
 		log.Fatalln("height should be log2(150000) * phi, height is ", height)
