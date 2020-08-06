@@ -187,6 +187,30 @@ func FindNodes(node *node, lower []byte, upper []byte, fn func(*node)) {
 	}
 }
 
+// Reverse FindNodes calls function fn on nodes with key between lower and upper inclusive
+func FindNodesReverse(node *node, lower []byte, upper []byte, fn func(*node)) {
+	if node == nil {
+		return
+	}
+
+	/* If node.key is smaller than upper, then only we can get o/p keys
+	in right subtree */
+	if upper == nil || less(node.key, upper) {
+		FindNodesReverse(node.right, lower, upper, fn)
+	}
+
+	if isNodeInRange(node, lower, upper) {
+		fn(node)
+	}
+
+	/* Since the desired o/p is sorted, recurse for left subtree first
+	   If node.key is greater than lower, then only we can get o/p keys
+	   in left subtree */
+	if lower == nil || less(lower, node.key) {
+		FindNodesReverse(node.left, lower, upper, fn)
+	}
+}
+
 // FindNodes returns a slice of nodes with the keys in range lower and upper inclusive
 func (t *Tree) FindNodes(lower []byte, upper []byte) []TreeEntry {
 	if t.root == nil {
@@ -199,6 +223,21 @@ func (t *Tree) FindNodes(lower []byte, upper []byte) []TreeEntry {
 		results = append(results, TreeEntry{n.key, n.data})
 	}
 	FindNodes(t.root, lower, upper, nodeInRange)
+	return results
+}
+
+// Reverse FindNodes returns a slice of nodes with the keys in range lower and upper inclusive
+func (t *Tree) FindNodesReverse(lower []byte, upper []byte) []TreeEntry {
+	if t.root == nil {
+		return nil
+	}
+
+	results := make([]TreeEntry, 0)
+
+	nodeInRange := func(n *node) {
+		results = append(results, TreeEntry{n.key, n.data})
+	}
+	FindNodesReverse(t.root, lower, upper, nodeInRange)
 	return results
 }
 

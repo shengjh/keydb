@@ -1,4 +1,4 @@
-package structkeys
+package main
 
 import (
 	"bytes"

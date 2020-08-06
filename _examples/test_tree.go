@@ -1,6 +1,9 @@
 package main
 
-import "github.com/shengjh/keydb"
+import (
+	"fmt"
+	"github.com/shengjh/keydb"
+)
 
 func main()  {
 
@@ -11,6 +14,14 @@ func main()  {
 	t.Insert([]byte("0"), []byte("0"))
 	t.Insert([]byte("4"), []byte("4"))
 
-	t.BfsDump()
-	t.BfsDump1()
+	re := t.FindNodes([]byte("0"), []byte("3"))
+	for _, p := range re{
+		fmt.Printf("%s:%s ", p.Key, p.Value)
+	}
+
+	print("\n")
+	re = t.FindNodesReverse([]byte("0"), []byte("3"))
+	for _, p := range re{
+		fmt.Printf("%s:%s ", p.Key, p.Value)
+	}
 }
